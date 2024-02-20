@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Searchbar, TopPlay } from "./components";
+import { Searchbar} from "./components";
 import Sidebar from "./layouts/Sidebar";
 import {
   AroundYou,
@@ -10,6 +10,7 @@ import {
   TopArtists,
   TopCharts,
 } from "./pages";
+import { TopPlay } from "./layouts/TopPlay";
 
 const App = () => {
   //const { activeSong } = useSelector((state) => state.player);

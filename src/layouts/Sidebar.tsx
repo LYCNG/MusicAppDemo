@@ -43,15 +43,16 @@ const Sidebar = () => {
             onClick={() => setShowMobileMenu(true)}
           />
         )}
-        <div
+      </div>
+      <div
+         
           className={`absolute top-0 h-screen w-2/3 bg-gradient-to-tl from-white/10 to-[#483d8b] backdrop-blur-lg z-10 
-          p-6 md:hidden transition-transform duration-500 ease-out-in transform
-          ${showMobileMenu ? "translate-x-full" : "translate-x-0"}`}
+          p-6 md:hidden transition-transform duration-500 ease-in-out transform
+          ${showMobileMenu ? "left-0" : "-translate-x-full"}`}
         >
           <img src={logo} alt="logo" className="w-full h-14 object-contain" />
           <NavLinks handleClick={() => setShowMobileMenu(false)} />
         </div>
-      </div>
     </React.Fragment>
   );
 };
