@@ -3,19 +3,18 @@ import Searchbar from './Searchbar';
 import SongCard from './SongCard';
 import TopPlay from './TopPlay';
 // import ArtistCard from './ArtistCard';
-// import DetailsHeader from './DetailsHeader';
+
 // import SongBar from './SongBar';
-// import RelatedSongs from './RelatedSongs';
+import DetailsHeader from './DetailsHeader';
 import Error404 from './Error404';
 import Loader from './Loader';
 import MusicPlayer from './MusicPlayer';
+import RelatedSongs from './RelatedSongs';
 
 export {
-    Error404, Loader,
     //   ArtistCard,
-    //   DetailsHeader,
+    DetailsHeader, Error404, Loader, MusicPlayer,
     //   SongBar,
-    //   RelatedSongs,
-    MusicPlayer, Searchbar, SongCard, TopPlay
+    RelatedSongs, Searchbar, SongCard, TopPlay
 };
 

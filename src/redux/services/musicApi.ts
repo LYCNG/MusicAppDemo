@@ -25,8 +25,17 @@ export const musicCoreApi = createApi({
                     startFrom: '0'
                 },
             })
+        }),
+        getSongDetail: builder.query({
+            query: (songId:string) => ({
+                url: 'songs/get-details',
+                params: {
+                    key: songId,
+                    locale: 'en-US'
+                }
+            })
         })
   }),
 });
 
-export const { useGetTopChartQuery } = musicCoreApi;
+export const { useGetTopChartQuery,useGetSongDetailQuery } = musicCoreApi;

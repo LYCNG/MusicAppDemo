@@ -1,5 +1,4 @@
 //Error Loader  SonCard
-import { useEffect, useState } from "react";
 import { genres } from "../assets/constants";
 import { Loader, SongCard } from "../components";
 import Error404 from "../components/Error404";
@@ -14,20 +13,11 @@ const Discover = () => {
 
   const { data, isFetching, error } = useGetTopChartQuery("");
   const genreTitle = "Pop";
-  const [dataset, setDataset] = useState<SongType[]>([]);
 
-  useEffect(() => {
-    if (data) {
-      setDataset(data.tracks);
-    }
-  }, [data]);
+  const dataset: SongType[] = data ? data.tracks : [];
+
   if (isFetching) return <Loader title="loading song..." />;
-  if (error)
-    return (
-      <>
-        <Error404 />
-      </>
-    );
+  if (error) return <Error404 />;
 
   return (
     <div className="flex flex-col">

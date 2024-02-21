@@ -17,16 +17,8 @@ export const PlayPause: React.FC<PlayPauseType> = ({
   handlePlay,
 }) => {
   return isPlaying && activeSong.title === song.title ? (
-    <FaPauseCircle
-      onClick={() => handlePause}
-      size={35}
-      className="text-gray-300"
-    />
+    <FaPauseCircle onClick={handlePause} size={35} className="text-gray-300" />
   ) : (
-    <FaPlayCircle
-      onClick={() => handlePlay}
-      size={35}
-      className="text-gray-300"
-    />
+    <FaPlayCircle onClick={handlePlay} size={35} className="text-gray-300" />
   );
 };
