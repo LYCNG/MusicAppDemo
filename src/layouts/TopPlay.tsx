@@ -31,21 +31,21 @@ const TopSongCard = ({
 }) => (
   <div
     key={index}
-    className="w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 round-lg cursor-pointer mb-2"
+    className="round-lg mb-2 flex w-full cursor-pointer flex-row items-center p-4 py-2 hover:bg-[#4c426e]"
   >
-    <h3 className="fot-bold text-base text-white mr-3">{index + 1}</h3>
-    <div className="flex-1 flex flex-row justify-between items-center">
+    <h3 className="fot-bold mr-3 text-base text-white">{index + 1}</h3>
+    <div className="flex flex-1 flex-row items-center justify-between">
       <img
-        className="w-20 h-20 rounded-lg"
+        className="h-20 w-20 rounded-lg"
         src={song.images.coverart}
         alt={song.title}
       />
-      <div className="flex-1 flex flex-col justify-center mx-3">
+      <div className="mx-3 flex flex-1 flex-col justify-center">
         <Link to={`/songs/${song.key}`}>
           <p className="text-xl font-bold  text-white">{song.title}</p>
         </Link>
-        <Link to={`/songs/${song.artists[0].adamid}`}>
-          <p className="text-base text-gray-300 mt-1 ">{song.subtitle}</p>
+        <Link to={`/artists/${song.artists[0].adamid}`}>
+          <p className="mt-1 text-base text-gray-300 ">{song.subtitle}</p>
         </Link>
       </div>
     </div>
@@ -82,13 +82,13 @@ export const TopPlay = () => {
   return (
     <div
       ref={divRef}
-      className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col"
+      className="mb-6 ml-0 flex max-w-full flex-1 flex-col xl:mb-0 xl:ml-6 xl:max-w-[500px]"
     >
-      <div className="w-full flex flex-col">
-        <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Charts</h2>
+      <div className="flex w-full flex-col">
+        <div className="flex flex-row items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Top Charts</h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">see more</p>
+            <p className="cursor-pointer text-base text-gray-300">see more</p>
           </Link>
         </div>
         <div className="mt-4 flex flex-col gap-1">
@@ -105,11 +105,11 @@ export const TopPlay = () => {
           ))}
         </div>
       </div>
-      <div className="w-full flex flex-col mt-8">
-        <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-2xl">Top Artists</h2>
+      <div className="mt-8 flex w-full flex-col">
+        <div className="flex flex-row items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Top Artists</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">see more</p>
+            <p className="cursor-pointer text-base text-gray-300">see more</p>
           </Link>
         </div>
         <Swiper
@@ -125,13 +125,13 @@ export const TopPlay = () => {
             <SwiperSlide
               key={song.key}
               style={{ width: "25%", height: "auto" }}
-              className="shadow-lg rounded-full animate-slideright"
+              className="animate-slideright rounded-full shadow-lg"
             >
               <Link to={`/artists/${song.artists[0].adamid}`}>
                 <img
                   src={song.images.background}
                   alt="name"
-                  className="rounded-full w-full object-cover"
+                  className="w-full rounded-full object-cover"
                 />
               </Link>
             </SwiperSlide>

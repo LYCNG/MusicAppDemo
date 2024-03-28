@@ -28,9 +28,18 @@ export const musicCoreApi = createApi({
         }),
         getSongDetail: builder.query({
             query: (songId:string) => ({
-                url: 'songs/get-details',
+                url: 'shazam-songs/get-details',
                 params: {
-                    key: songId,
+                    id: songId,
+                    locale: 'en-US'
+                }
+            })
+        }),
+        getSongRelated: builder.query({
+            query: ({ songId }) => ({
+                url: 'shazam-songs/list-similarities',
+                params: {
+                    id: `track-similarities-id-${songId}`,
                     locale: 'en-US'
                 }
             })

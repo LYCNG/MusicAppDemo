@@ -89,7 +89,10 @@ const initialShare: ShareType = {
 export interface SongType {
  artists:        ArtistType[];
  highlightsurls: HighlightsurlsType;
- hub:            HubType;
+    hub: HubType;
+    genres: {
+        primary:string
+    }
  images:         ImagesType;
  key:            string;
  layout:         string;
@@ -100,10 +103,14 @@ export interface SongType {
  type:           string;
  url:            string;
 }
-export const initialSong:SongType = {
+export const initialSong: SongType = {
+    
     artists:      [],
     highlightsurls: {
         artisthighlightsurl:'',
+    },
+    genres: {
+        primary:''
     },
     hub:            initialHub,
     images:          initialImages,
