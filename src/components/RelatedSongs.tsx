@@ -1,4 +1,5 @@
-import { SongType } from "../types/song";
+import { ArtistSongType, DetailType } from "../types/detail";
+
 import SongBar from "./SongBar";
 
 const RelatedSongs = ({
@@ -9,12 +10,12 @@ const RelatedSongs = ({
   handlePauseClick,
   handlePlayClick,
 }: {
-  data: SongType;
+  data: DetailType[]|ArtistSongType[];
   artistId: string;
   isPlaying: boolean;
-  activeSong: SongType;
-  handlePauseClick: () => void;
-  handlePlayClick: () => void;
+    activeSong: string;
+  handlePauseClick?: () => void;
+  handlePlayClick?: (songId:string,i:number) => void;
 }) => {
   return (
     <div className="flex flex-col">
@@ -23,7 +24,7 @@ const RelatedSongs = ({
       <div className="mt-6 flex w-full flex-col">
         {data?.map((song, i) => (
           <SongBar
-            key={`${artistId}-${song.key}-${i}`}
+            key={`${artistId}-${song.id}-${i}`}
             song={song}
             i={i}
             artistId={artistId}

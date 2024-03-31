@@ -86,7 +86,7 @@ const initialShare: ShareType = {
  twitter:  '',
 };
 
-export interface SongType {
+export type SongType ={
  artists:        ArtistType[];
  highlightsurls: HighlightsurlsType;
     hub: HubType;
@@ -106,7 +106,6 @@ export interface SongType {
 
 
 export const initialSong: SongType = {
-    
     artists:      [],
     highlightsurls: {
         artisthighlightsurl:'',

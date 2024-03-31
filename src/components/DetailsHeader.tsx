@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { DetailType } from "../types/detail";
+import { ArtistType, DetailType } from "../types/detail";
 
 const DetailsHeader = ({
   artistId,
@@ -8,8 +8,8 @@ const DetailsHeader = ({
   artistData,
 }: {
   artistId: string;
-  detail: DetailType;
-  artistData?: string;
+  detail?: DetailType;
+  artistData?:  ArtistType;
 }) => {
   return (
     <div className="relative flex w-full flex-col">
@@ -17,20 +17,24 @@ const DetailsHeader = ({
       <div className="absolute  flex items-center">
         <img
           alt="art"
-          src={detail.images.coverArt}
+          src={artistId ?
+            artistData.artwork['url'].replace('{w}', '500')
+            .replace('{h}', '500') : detail.images.coverArt}
           className="h-28 w-28 rounded-full border-2 object-cover shadow-xl shadow-black sm:h-48 sm:w-48"
         />
         <div className="ml-5">
           <p className="text-xl font-bold text-white sm:text-3xl">
-            {detail.title}
+            {artistId ?artistData.name:detail.title}
           </p>
-          <Link to={`/artists/${artistId}`}>
-            <p className="mt-2 text-base text-gray-400">
-              {detail.primaryArtist}
-            </p>
-          </Link>
+          {!artistId && (
+             <Link to={`/artists/${detail.artistId}`}>
+              <p className="mt-2 text-base text-gray-400">
+                {detail.primaryArtist}
+              </p>
+            </Link>
+          )}
           <p className="mt-2 text-base text-gray-400">
-            {detail.genres.primary}
+            {artistId? artistData.genreNames[0]:detail.genres.primary}
           </p>
         </div>
       </div>

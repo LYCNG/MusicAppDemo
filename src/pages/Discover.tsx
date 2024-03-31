@@ -4,12 +4,12 @@ import { Loader, SongCard } from "../components";
 import Error404 from "../components/Error404";
 import { useGetTopChartQuery } from "../redux/services/musicApi";
 import { SongType } from "../types/song";
-
-import { useStoreDispatch, useStoreSelector } from "../hooks/hooks";
+import { selectGenreListId } from "../redux/features/playerSlice";
+import {  useStoreDispatch, useStoreSelector } from "../hooks/hooks";
 
 const Discover = () => {
   const dispatch = useStoreDispatch();
-  const { activeSong, isPlaying } = useStoreSelector((state) => state.player);
+  const { activeSong, isPlaying,genreListId } = useStoreSelector((state) => state.player);
 
   const { data, isFetching, error } = useGetTopChartQuery("");
   const genreTitle = "Pop";
@@ -18,7 +18,6 @@ const Discover = () => {
 
   if (isFetching) return <Loader title="loading song..." />;
   if (error) return <Error404 />;
-
   return (
     <div className="flex flex-col">
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
@@ -26,8 +25,8 @@ const Discover = () => {
           Discover {genreTitle}
         </h2>
         <select
-          onChange={() => console.log()}
-          value=""
+          onChange={(e) => dispatch(selectGenreListId(e.target.value))}
+          value={genreListId||'pop'}
           className="bg-black text-gray-300 p-3 text-sm round-lg outline-none sm:mt-0 mt-5"
         >
           {genres.map((g) => (

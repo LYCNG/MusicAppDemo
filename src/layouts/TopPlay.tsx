@@ -25,7 +25,7 @@ const TopSongCard = ({
   song: SongType;
   index: number;
   isPlaying: boolean;
-  activeSong: SongType;
+  activeSong: string;
   handlePause: () => void;
   handlePlay: () => void;
 }) => (
@@ -74,7 +74,7 @@ export const TopPlay = () => {
   const handlePause = () => {
     dispatch(playPause(false));
   };
-  const handlePlay = (song: SongType, index: number) => {
+  const handlePlay = (song: string, index: number) => {
     dispatch(setActiveSong({ song: song, index: index }));
     dispatch(playPause(true));
   };
@@ -100,7 +100,7 @@ export const TopPlay = () => {
               activeSong={activeSong}
               isPlaying={isPlaying}
               handlePause={handlePause}
-              handlePlay={() => handlePlay(song, index)}
+              handlePlay={() => handlePlay(song.key, index)}
             />
           ))}
         </div>

@@ -8,6 +8,7 @@ import {
 } from "../redux/services/musicApi";
 import { DetailType } from "../types/detail";
 
+
 type ResultType = {
   data: Record<string, string>[];
   resources: {
@@ -43,30 +44,33 @@ const SongDetails = () => {
   const resource = resData.resources;
   const detail: DetailType = resource["shazam-songs"][songId]["attributes"];
   const relations = resource["shazam-songs"][songId]["relationships"];
-  const { lyrics, artists } = relations;
-  const artistId = artists.data[0].id;
+  const { lyrics,artists } = relations;
+  const artistId = artists.data[0]['id'];
 
   const relativeResource = resDataRelation.resources;
   const relativeSongs = relativeResource["shazam-songs"];
   const relativeDetail: DetailType[] = Object.values(relativeSongs).map(
-    (item) => item["attributes"],
+    (item) => {
+      return {
+        id:item['id'],
+        ...item["attributes"]}
+    },
   );
-  console.log("res", relativeDetail);
-  if (!resData || !songId) return <Loader />;
 
+  if (!resData || !songId) return <Loader />;
   if (queryDetailError || queryRelationError) return <Error404 />;
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
 
-  const handlePlayClick = (song, i) => {
+  const handlePlayClick = (song:string, i:number) => {
     dispatch(setActiveSong({ song: song, index: i }));
     dispatch(playPause(true));
   };
   return (
     <div className="flex flex-col ">
-      <DetailsHeader artistId={artistId} detail={detail} />
+      <DetailsHeader artistId={''} detail={{ ...detail,artistId:artistId }} />
       <div className="mb-10">
         <h2 className="text-3xl font-bold text-white">Lyrics</h2>
         <div className="mt-5">
@@ -84,7 +88,8 @@ const SongDetails = () => {
         </div>
       </div>
       <RelatedSongs
-        data={relationData}
+        data={relativeDetail}
+        artistId=""
         isPlaying={isPlaying}
         activeSong={activeSong}
         handlePauseClick={handlePauseClick}

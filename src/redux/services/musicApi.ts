@@ -26,6 +26,17 @@ export const musicCoreApi = createApi({
                 },
             })
         }),
+        getSongsByGenre: builder.query({
+            query: (genre:string) => ({
+                url: '/charts/track',
+                 params: {
+                locale: 'en-US',
+                listId: genre,
+                pageSize: '20',
+                startFrom: '0'
+            },
+            })
+        }),
         getSongDetail: builder.query({
             query: ({songId}) => ({
                 url: 'shazam-songs/get-details',
@@ -43,8 +54,22 @@ export const musicCoreApi = createApi({
                     locale: 'en-US'
                 }
             })
+        }),
+        getArtistSummery: builder.query({
+            query: ({ artistId }) => ({
+                url: '/artists/get-summary',
+                params: {
+                    id: artistId,
+                    l: 'en-US'
+                }
+            })
         })
   }),
 });
 
-export const { useGetTopChartQuery,useGetSongDetailQuery,useGetSongRelatedQuery } = musicCoreApi;
+export const {
+    useGetTopChartQuery,
+    useGetSongDetailQuery,
+    useGetSongRelatedQuery,
+    useGetArtistSummeryQuery
+} = musicCoreApi;
