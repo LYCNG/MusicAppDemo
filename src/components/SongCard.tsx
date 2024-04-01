@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import { useStoreDispatch } from "../hooks/hooks";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
+import { DetailType } from "../types/detail";
 import { SongType } from "../types/song";
 import { PlayPause } from "./PlayPause";
 
 const SongCard = ({
   song,
+  dataset,
   index,
   activeSong,
   isPlaying,
 }: {
   song: SongType;
+  dataset?: SongType[] | DetailType[];
   index: number;
   activeSong: string;
   isPlaying: boolean;
@@ -20,14 +23,16 @@ const SongCard = ({
     dispatch(playPause(false));
   };
   const handlePlay = () => {
-    dispatch(setActiveSong({ song: song.key, index: index }));
+    dispatch(
+      setActiveSong({ songId: song.key, songData: dataset, index: index }),
+    );
     dispatch(playPause(true));
   };
   return (
-    <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
-      <div className="relative w-full h-56 group">
+    <div className="flex w-[250px] animate-slideup cursor-pointer flex-col rounded-lg bg-white/5 bg-opacity-80 p-4 backdrop-blur-sm">
+      <div className="group relative h-56 w-full">
         <div
-          className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${activeSong === song.key ? "flex bg-black bg-opacity-70" : "hidden"}`}
+          className={`absolute inset-0 items-center justify-center bg-black bg-opacity-50 group-hover:flex ${activeSong === song.key ? "flex bg-black bg-opacity-70" : "hidden"}`}
         >
           <PlayPause
             song={song}
@@ -40,10 +45,10 @@ const SongCard = ({
         <img alt="song_img" src={song.images.coverart} />
       </div>
       <div className="mt-4 flex flex-col">
-        <p className="font-semibold text-lg text-white truncate">
+        <p className="truncate text-lg font-semibold text-white">
           <Link to={`/songs/${song.key}`}>{song.title}</Link>
         </p>
-        <p className="text-sm truncate text-gray-300 mt-1">
+        <p className="mt-1 truncate text-sm text-gray-300">
           <Link
             to={
               song.artists

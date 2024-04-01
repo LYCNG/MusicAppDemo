@@ -74,8 +74,10 @@ export const TopPlay = () => {
   const handlePause = () => {
     dispatch(playPause(false));
   };
-  const handlePlay = (song: string, index: number) => {
-    dispatch(setActiveSong({ song: song, index: index }));
+  const handlePlay = (songId: string, index: number) => {
+    dispatch(
+      setActiveSong({ songId: songId, songData: topPlays, index: index }),
+    );
     dispatch(playPause(true));
   };
 

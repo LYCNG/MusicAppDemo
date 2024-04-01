@@ -101,7 +101,8 @@ export type SongType ={
  subtitle:       string;
  title:          string;
  type:           string;
- url:            string;
+    url: string;
+ id:string
 }
 
 
@@ -115,7 +116,8 @@ export const initialSong: SongType = {
     },
     hub:            initialHub,
     images:          initialImages,
-    key:            '',
+    key: '',
+    id:'',
     layout:        '',
     properties:     {},
     share:          initialShare,

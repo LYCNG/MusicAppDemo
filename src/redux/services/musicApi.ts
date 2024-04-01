@@ -63,13 +63,26 @@ export const musicCoreApi = createApi({
                     l: 'en-US'
                 }
             })
+        }),
+        getSongBySearch: builder.query({
+            query: (searchText) => ({
+                url: '/search',
+                params: {
+                    term: searchText,
+                    locale: 'en-US',
+                    offset: '0',
+                    limit: '5'
+                },
+            })
         })
   }),
 });
 
 export const {
     useGetTopChartQuery,
+    useGetSongsByGenreQuery,
     useGetSongDetailQuery,
     useGetSongRelatedQuery,
-    useGetArtistSummeryQuery
+    useGetArtistSummeryQuery,
+    useGetSongBySearchQuery
 } = musicCoreApi;
